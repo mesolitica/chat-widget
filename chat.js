@@ -102,6 +102,12 @@
                   color: white;
                   align-self: flex-end;
               }
+              .error-message {
+                background-color: #FFEDED;
+                color: #FF0000;
+                align-self: flex-start;
+                border: 1px solid #FF0000;
+              }
               .chat-input {
                   display: flex;
                   padding: 10px;
@@ -323,6 +329,20 @@
             }
         }
 
+        function addErrorMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message error-message';
+            messageDiv.textContent = text;
+
+            const timestampDiv = document.createElement('div');
+            timestampDiv.className = 'timestamp';
+            timestampDiv.textContent = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.appendChild(timestampDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
         function addTypingIndicator() {
             const typingDiv = document.createElement('div');
             typingDiv.className = 'typing-indicator';
@@ -342,10 +362,31 @@
                 addMessage(text, 'user');
                 input.value = '';
                 const typingIndicator = addTypingIndicator();
-                setTimeout(() => {
-                    removeTypingIndicator(typingIndicator);
-                    addMessage("I received your message. How can I help further?", 'ai');
-                }, 2000);
+
+                headers = {
+                    'Content-Type': 'application/json'
+                };
+
+                const jsonData = {
+                    sender: userUUID,
+                    message: text
+                };
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(jsonData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        const r = data;
+                        removeTypingIndicator(typingIndicator);
+                        addMessage(r[0]['text'], 'ai');
+                    })
+                    .catch(error => {
+                        removeTypingIndicator(typingIndicator);
+                        addErrorMessage(error);
+                    });
             }
         }
 

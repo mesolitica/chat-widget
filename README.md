@@ -10,6 +10,7 @@ Customizable Web Chat Widget 💬
 - Customize color, title, font family and first message.
 - Custom POST request.
 - Auto generate user UUID and store the historical chats in UserSession.
+- Error message on exception.
 - 100% pure vanilla Javascript.
 
 https://github.com/mesolitica/chat-widget/assets/19810909/bd4220a9-38e4-4c6c-ac87-ba5788ead9d7
@@ -67,3 +68,29 @@ window.ChatWidget = {
 };
 ```
 
+## What kind of parameters we use for POST request?
+
+```js
+const jsonData = {
+    sender: userUUID,
+    message: text
+};
+
+fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(jsonData)
+})
+    .then(response => response.json())
+    .then(data => {
+        const r = data;
+        removeTypingIndicator(typingIndicator);
+        addMessage(r[0]['text'], 'ai');
+    })
+    .catch(error => {
+        removeTypingIndicator(typingIndicator);
+        addErrorMessage(error);
+    });
+```
+
+The API must returned a single array with a dictionary element and `text` for the key.
