@@ -1,17 +1,13 @@
 # chat-widget 💬
 
-Public Chat Widget 💬 from Mesolitica!
+Chat Widget from Mesolitica!
 
 - Fullscreen button and animation.
 - Waiting chat animation.
 - Customize color.
 - Custom POST request.
-
-<div align="center">
-    <video loop="" autoplay="" muted="" >
-        <source src="record.mov">
-    </video>
-</div>
+- Auto generate user UUID and store the historical chats in UserSession.
+- 100% pure vanilla Javascript.
 
 ## how-to
 
