@@ -8,7 +8,9 @@ Public Chat Widget 💬 from Mesolitica!
 - Custom POST request.
 
 <div align="center">
-    <img align="center" src="./record.mov" alt="demonstration">
+    <video loop="" autoplay="" muted="" >
+        <source src="record.mov">
+    </video>
 </div>
 
 ## how-to
