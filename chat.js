@@ -1,9 +1,5 @@
 (function (window) {
-    function createChatWidget(
-        homeUrl,
-        color = '#0056FF',
-        first_message = "Hello, my name is bot!",
-    ) {
+    function createChatWidget(url, color, title, font_family, first_message) {
         const style = document.createElement('style');
         style.textContent = `
               .chat-widget-container {
@@ -21,7 +17,7 @@
                   border-radius: 10px;
                   overflow: hidden;
                   box-shadow: 0 5px 40px rgba(0,0,0,0.16);
-                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                  font-family: ${font_family};
                   display: flex;
                   flex-direction: column;
                   background-color: white;
@@ -175,7 +171,7 @@
               <div class="chat-widget collapsed">
                   <div class="chat-content">
                       <div class="chat-header">
-                          <span>Conversation</span>
+                          <span>${title}</span>
                           <button class="fullscreen-btn">⛶</button>
                       </div>
                       <div class="chat-messages"></div>
@@ -366,8 +362,14 @@
     }
 
     window.ChatWidget = {
-        init: function (homeUrl, color) {
-            createChatWidget(homeUrl, color);
+        init: function (
+            url,
+            color = "#0056FF",
+            title = "Conversation",
+            font_family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+            first_message = "Hello, my name is bot!",
+        ) {
+            createChatWidget(url, color, title, font_family, first_message);
         }
     };
 })(window);

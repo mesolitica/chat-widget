@@ -1,10 +1,13 @@
 # chat-widget 💬
 
-Chat Widget from Mesolitica!
+Customizable Web Chat Widget 💬
 
+## Features 🔥
+
+- Collapse and expand animation.
 - Fullscreen button and animation.
-- Waiting chat animation.
-- Customize color.
+- Waiting chat respond animation.
+- Customize color, title, font family and first message.
 - Custom POST request.
 - Auto generate user UUID and store the historical chats in UserSession.
 - 100% pure vanilla Javascript.
@@ -26,7 +29,6 @@ python3 server.py --port 8080
 Minimal as,
 
 ```html
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -47,5 +49,21 @@ Minimal as,
 </body>
 
 </html>
+```
+
+## Parameters
+
+```js
+window.ChatWidget = {
+    init: function (
+        url,
+        color = "#0056FF",
+        title = "Conversation",
+        font_family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+        first_message = "Hello, my name is bot!",
+    ) {
+        createChatWidget(url, color, title, font_family, first_message);
+    }
+};
 ```
 
