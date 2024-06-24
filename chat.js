@@ -2,7 +2,7 @@
     function createChatWidget(
         homeUrl,
         color = '#0056FF',
-        first_message = "Hello there, you're now speaking with Fin! I am Intercom's new AI agent and I'm here to answer your questions, but you'll always have the option to talk to our team if you want to.",
+        first_message = "Hello, my name is bot!",
     ) {
         const style = document.createElement('style');
         style.textContent = `
@@ -360,7 +360,7 @@
 
         initializeUser();
 
-        if (chatHistory.length === 0) {
+        if (chatHistory.length === 0 && first_message.length > 0) {
             addMessage(first_message, 'ai');
         }
     }
