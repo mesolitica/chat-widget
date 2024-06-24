@@ -7,9 +7,11 @@ Public Chat Widget 💬 from Mesolitica!
 - Customize color.
 - Custom POST request.
 
-## how-to
+<div align="center">
+    <img align="center" src="./record.mov" alt="demonstration">
+</div>
 
-![alt text](printscreen.png)
+## how-to
 
 ### localhost
 
