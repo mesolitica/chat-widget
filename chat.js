@@ -381,7 +381,10 @@
                     .then(data => {
                         const r = data;
                         removeTypingIndicator(typingIndicator);
-                        addMessage(r[0]['text'], 'ai');
+                        for (let i = 0; i < r.length; i++) {
+                            addMessage(r[i]['text'], 'ai');
+                        }
+
                     })
                     .catch(error => {
                         removeTypingIndicator(typingIndicator);

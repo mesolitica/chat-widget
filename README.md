@@ -22,7 +22,7 @@ https://github.com/mesolitica/chat-widget/assets/19810909/bd4220a9-38e4-4c6c-ac8
 Use Python webserver,
 
 ```bash
-python3 server.py --port 8080
+python3 server.py --port 8080 --host 0.0.0.0
 ```
 
 ### Existing website
