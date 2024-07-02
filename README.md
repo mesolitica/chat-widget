@@ -39,7 +39,7 @@ Minimal as,
 
 <body>
 
-  <script src="https://cdn.jsdelivr.net/gh/mesolitica/chat-widget/chat.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/mesolitica/chat-widget@0.1.1/chat.js"></script>
   <script>
     ChatWidget.init(
       'https://example.com',

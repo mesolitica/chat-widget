@@ -182,7 +182,7 @@
                       </div>
                       <div class="chat-messages"></div>
                       <div class="chat-input">
-                          <input type="text" placeholder="Type your message in here...">
+                          <input style="box-shadow: none;" type="text" placeholder="Type your message in here...">
                           <button>➤</button>
                       </div>
                   </div>
