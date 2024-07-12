@@ -62,8 +62,10 @@ window.ChatWidget = {
         title = "Conversation",
         font_family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
         first_message = "Hello, my name is bot!",
+        init_payload = 'SpecialInitPayLoadDoNotTouch',
+        z_index = '1000',
     ) {
-        createChatWidget(url, color, title, font_family, first_message);
+        createChatWidget(url, color, title, font_family, first_message, init_payload, z_index);
     }
 };
 ```
@@ -85,7 +87,9 @@ fetch(url, {
     .then(data => {
         const r = data;
         removeTypingIndicator(typingIndicator);
-        addMessage(r[0]['text'], 'ai');
+        for (let i = 0; i < r.length; i++) {
+            addMessage(r[i]['text'], 'ai');
+        }
     })
     .catch(error => {
         removeTypingIndicator(typingIndicator);
@@ -94,3 +98,5 @@ fetch(url, {
 ```
 
 The API must returned a single array with a dictionary element and `text` for the key.
+
+**We will support streaming soon**.

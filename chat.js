@@ -1,5 +1,5 @@
 (function (window) {
-    function createChatWidget(url, color, title, font_family, first_message) {
+    function createChatWidget(url, color, title, font_family, first_message, init_payload, z_index) {
         const style = document.createElement('style');
         style.textContent = `
               .chat-widget-container {
@@ -9,7 +9,7 @@
                   display: flex;
                   flex-direction: column;
                   align-items: flex-end;
-                  z-index: 1000;
+                  z-index: ${z_index};
               }
               .chat-widget {
                   width: 350px;
@@ -403,6 +403,39 @@
         if (chatHistory.length === 0 && first_message.length > 0) {
             addMessage(first_message, 'ai');
         }
+
+        if (chatHistory.length === 0 && init_payload.length > 0) {
+            const typingIndicator = addTypingIndicator();
+
+            headers = {
+                'Content-Type': 'application/json'
+            };
+
+            const jsonData = {
+                sender: userUUID,
+                message: init_payload,
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(jsonData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const r = data;
+                    removeTypingIndicator(typingIndicator);
+                    for (let i = 0; i < r.length; i++) {
+                        addMessage(r[i]['text'], 'ai');
+                    }
+
+                })
+                .catch(error => {
+                    removeTypingIndicator(typingIndicator);
+                    addErrorMessage(error);
+                });
+
+        }
     }
 
     window.ChatWidget = {
@@ -412,8 +445,10 @@
             title = "Conversation",
             font_family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
             first_message = "Hello, my name is bot!",
+            init_payload = 'SpecialInitPayLoadDoNotTouch',
+            z_index = '1000',
         ) {
-            createChatWidget(url, color, title, font_family, first_message);
+            createChatWidget(url, color, title, font_family, first_message, init_payload, z_index);
         }
     };
 })(window);
