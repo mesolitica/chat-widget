@@ -1,6 +1,6 @@
 # chat-widget 💬
 
-Customizable Web Chat Widget 💬
+Customizable Web Chat Widget 💬, **deprecated, use https://github.com/mesolitica/nous-chat-widget**
 
 ## Features 🔥
 
